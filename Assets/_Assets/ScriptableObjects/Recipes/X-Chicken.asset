@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5ae0d06cfb49584884486a16ae594a7, type: 3}
-  m_Name: X-Salad
+  m_Name: X-Chicken
   m_EditorClassIdentifier: 
-  recipeName: X-Salad
-  recipeIcone: {fileID: -2413806693520163455, guid: 7a4cadc9cb62ee044b2f54d49023c020, type: 3}
+  recipeName: X-Chicken
+  recipeIcone: {fileID: 0}
   ingredients:
+  - {fileID: 11400000, guid: a6d6ddce530076b429363cce3fed25bb, type: 2}
   - {fileID: 11400000, guid: 8405c1b1b4aabe2409c9b33ed06262a1, type: 2}
   - {fileID: 11400000, guid: af08051fe686ea14691678fb96257830, type: 2}
-  - {fileID: 11400000, guid: 06f7c35b22a06da41994cb58ae5b77c0, type: 2}
