@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OrderDisplay : MonoBehaviour
+public class OrderManager : MonoBehaviour
 {
     [SerializeField] RecipeSO[] recipes;
 
@@ -20,6 +20,7 @@ public class OrderDisplay : MonoBehaviour
         NewOrder();
     }
 
+    //show the new recipe on order display
     private void NewOrder()
     {
         nameRecipe.text = currentRecipe.recipeName;
@@ -32,6 +33,7 @@ public class OrderDisplay : MonoBehaviour
         this.ingredients.text = ingredients;
     }
 
+    //choose a random recipe
     void RandomRecipe()
     {
         int index = Random.Range(0, recipes.Length);

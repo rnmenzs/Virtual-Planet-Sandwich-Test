@@ -7,6 +7,6 @@ using UnityEngine.UI;
 public class IngredientsSO : ScriptableObject
 {      
     public string ingredientName;
-    public Image ingredientIcon;
+    public Sprite ingredientIcon;
     
 }
