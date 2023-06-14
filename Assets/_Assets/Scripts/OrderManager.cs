@@ -10,19 +10,21 @@ public class OrderManager : MonoBehaviour
 
     [SerializeField] RecipeSO currentRecipe;
 
+    public RecipeSO CurrentRecipe { get { return currentRecipe; } }
+
     [SerializeField] TMP_Text nameRecipe;
     [SerializeField] Image iconRecipe;
     [SerializeField] TMP_Text ingredients;
 
     private void Start()
-    {
-        RandomRecipe();
+    {  
         NewOrder();
     }
 
     //show the new recipe on order display
-    private void NewOrder()
+    public void NewOrder()
     {
+        RandomRecipe();
         nameRecipe.text = currentRecipe.recipeName;
         iconRecipe.sprite = currentRecipe.recipeIcone;
         string ingredients = "";

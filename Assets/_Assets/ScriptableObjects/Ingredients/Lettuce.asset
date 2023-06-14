@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lettuce
   m_EditorClassIdentifier: 
   ingredientName: Lettuce
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: -618014047, guid: 3137ed62770180142891dc17631cbbca, type: 3}

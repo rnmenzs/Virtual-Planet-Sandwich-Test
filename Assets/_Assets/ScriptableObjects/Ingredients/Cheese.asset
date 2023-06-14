@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: 
   ingredientName: Cheese
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: 1710010110, guid: 3137ed62770180142891dc17631cbbca, type: 3}

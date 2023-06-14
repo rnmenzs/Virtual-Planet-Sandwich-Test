@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Chicken
   m_EditorClassIdentifier: 
   ingredientName: Chicken
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: -237684549, guid: 3137ed62770180142891dc17631cbbca, type: 3}

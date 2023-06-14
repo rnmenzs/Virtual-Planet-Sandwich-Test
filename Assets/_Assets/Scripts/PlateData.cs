@@ -7,17 +7,22 @@ public class PlateData : MonoBehaviour
 {
     [SerializeField]
     private IngredientsSO ingredient;
-    
+    [SerializeField] Image ingredientIcon;
+
+
     public IngredientsSO Ingredient 
     { 
         get { return ingredient; } 
         set { ingredient = value; } 
     }
 
-    [SerializeField] Image ingredientIcon;
-
     public void AddIngredient()
     {
-        Debug.Log(ingredient.ingredientName);
+        ingredientIcon.sprite = this.ingredient.ingredientIcon;
+    }
+
+    public void ClearPlate()
+    {
+        ingredientIcon.sprite = null;
     }
 }

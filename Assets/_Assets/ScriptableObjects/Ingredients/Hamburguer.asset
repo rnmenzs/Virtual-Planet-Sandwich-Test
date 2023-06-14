@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Hamburguer
   m_EditorClassIdentifier: 
   ingredientName: Hamburguer
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: 336765493, guid: 3137ed62770180142891dc17631cbbca, type: 3}
