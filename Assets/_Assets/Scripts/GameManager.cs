@@ -15,12 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text txtScore;
     [SerializeField] TMP_Text txtTimer;
     [SerializeField] TMP_Text txtCountDown;
+    [SerializeField] TMP_Text txtFinalScore;
 
     int score;
     int timer;
 
     public UnityEvent WhenStart;
     public UnityEvent WhenGameOver;
+    public UnityEvent WhenRestart;
 
 
     RecipeSO currentRecipe;
@@ -82,6 +84,12 @@ public class GameManager : MonoBehaviour
         UpdateScore();
     }
 
+    public void RestartGame()
+    {
+        WhenRestart.Invoke();
+        StartCoroutine(StartGameCountDown());
+    }
+
     private void UpdateScore()
     {
         txtScore.text = $"Score: {score}";
@@ -98,7 +106,8 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         WhenGameOver.Invoke();
-        Debug.Log("GameOver");
+        txtFinalScore.text = $"Score: {score}";
+        
     }
 
     private IEnumerator StartGameCountDown()
