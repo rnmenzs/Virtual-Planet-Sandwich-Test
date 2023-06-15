@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +12,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] OrderManager orderManager;
     [SerializeField] PlatesManager platesManager;
 
-    int ingredientsChecks = 0;
+    [SerializeField] TMP_Text txtScore;
+    [SerializeField] TMP_Text txtTimer;
+    [SerializeField] TMP_Text txtCountDown;
 
-    public int score = 0;
-    
+    int score;
+    int timer;
+
+    public UnityEvent WhenStart;
+    public UnityEvent WhenGameOver;
+
 
     RecipeSO currentRecipe;
 
@@ -30,8 +38,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        StartCoroutine(StartGameCountDown());
+    }
+
     public void CheckRecipe()
     {
+        int ingredientsChecks = 0;
         List<IngredientsSO> ingredientsPlates = new List<IngredientsSO>();
 
         currentRecipe = orderManager.CurrentRecipe;
@@ -65,7 +79,51 @@ public class GameManager : MonoBehaviour
         }
 
         orderManager.NewOrder();
+        UpdateScore();
+    }
 
-        Debug.Log(score);
+    private void UpdateScore()
+    {
+        txtScore.text = $"Score: {score}";
+    }
+
+    private void StartGame()
+    {
+        score = 0 ;
+        timer = 5;
+        UpdateScore();
+        StartCoroutine(StartTimer());
+    }
+
+    private void GameOver()
+    {
+        WhenGameOver.Invoke();
+        Debug.Log("GameOver");
+    }
+
+    private IEnumerator StartGameCountDown()
+    {
+        int startCountDown = 3;
+        while (startCountDown > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            startCountDown--;
+        }
+        StartGame();
+        WhenStart.Invoke();
+    }
+
+    private IEnumerator StartTimer()
+    {
+        while (timer > 0)
+        {
+            int min = timer / 60;
+            int sec = timer % 60;
+            txtTimer.text = string.Format("{0:00}:{1:00}", min, sec);
+            yield return new WaitForSeconds(1f);
+            timer--;
+        }
+
+        GameOver();
     }
 }

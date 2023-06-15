@@ -37,6 +37,7 @@ public class PlatesManager : MonoBehaviour
                 plate.GetComponent<PlateData>().ClearPlate();
             }
 
+            platesCount = 0;
         }
     }
 }
