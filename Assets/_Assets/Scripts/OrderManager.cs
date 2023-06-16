@@ -12,27 +12,22 @@ public class OrderManager : MonoBehaviour
 
     public RecipeSO CurrentRecipe { get { return currentRecipe; } }
 
-    [SerializeField] TMP_Text nameRecipe;
+    [SerializeField] TMP_Text txtNameRecipe;
     [SerializeField] Image iconRecipe;
-    [SerializeField] TMP_Text ingredients;
-
-    private void Start()
-    {  
-        NewOrder();
-    }
+    [SerializeField] TMP_Text txtIngredients;
 
     //show the new recipe on order display
     public void NewOrder()
     {
         RandomRecipe();
-        nameRecipe.text = currentRecipe.recipeName;
+        txtNameRecipe.text = currentRecipe.recipeName;
         iconRecipe.sprite = currentRecipe.recipeIcone;
         string ingredients = "";
         foreach (var i in currentRecipe.ingredients)
         {
             ingredients += i.name + "\n";
         }
-        this.ingredients.text = ingredients;
+        txtIngredients.text = ingredients;
     }
 
     //choose a random recipe
@@ -41,5 +36,11 @@ public class OrderManager : MonoBehaviour
         int index = Random.Range(0, recipes.Length);
 
         currentRecipe = recipes[index];
+    }
+
+    public void ClearTxt()
+    {
+        txtNameRecipe.text = "";
+        txtIngredients.text = "";
     }
 }

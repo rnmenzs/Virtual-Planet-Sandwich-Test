@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hamburguer
   m_EditorClassIdentifier: 
   recipeName: X-Burguer
-  recipeIcone: {fileID: 7482667652216324306, guid: 84fd5816c64cfe1488c25b0d8b08fb2e, type: 3}
+  recipeIcone: {fileID: 336765493, guid: 3137ed62770180142891dc17631cbbca, type: 3}
   ingredients:
   - {fileID: 11400000, guid: 06f7c35b22a06da41994cb58ae5b77c0, type: 2}
   - {fileID: 11400000, guid: 9c92acc667179634f9c1286030d89e01, type: 2}

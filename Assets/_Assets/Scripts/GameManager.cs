@@ -4,6 +4,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +16,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] TMP_Text txtScore;
     [SerializeField] TMP_Text txtTimer;
-    [SerializeField] TMP_Text txtCountDown;
+    [SerializeField] TMP_Text txtCountdown;
     [SerializeField] TMP_Text txtFinalScore;
+
+    [SerializeField] PlayableDirector timeline;
 
     int score;
     int timer;
@@ -23,6 +27,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent WhenStart;
     public UnityEvent WhenGameOver;
     public UnityEvent WhenRestart;
+
+
 
 
     RecipeSO currentRecipe;
@@ -86,8 +92,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        WhenRestart.Invoke();
+        WhenRestart.Invoke(); 
+        timeline.Play();
         StartCoroutine(StartGameCountDown());
+        ClearTxt();
+        orderManager.ClearTxt();
     }
 
     private void UpdateScore()
@@ -97,10 +106,12 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-        score = 0 ;
+        score = 0;
         timer = 5;
         UpdateScore();
         StartCoroutine(StartTimer());
+        orderManager.NewOrder();
+
     }
 
     private void GameOver()
@@ -110,11 +121,18 @@ public class GameManager : MonoBehaviour
         
     }
 
+    private void ClearTxt()
+    {
+        txtScore.text = "";
+        txtTimer.text = "";
+    }
+
     private IEnumerator StartGameCountDown()
     {
-        int startCountDown = 3;
+        int startCountDown = 10;
         while (startCountDown > 0)
         {
+            txtCountdown.text = startCountDown.ToString();
             yield return new WaitForSeconds(1f);
             startCountDown--;
         }

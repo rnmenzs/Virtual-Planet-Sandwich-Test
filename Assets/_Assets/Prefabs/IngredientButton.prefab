@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 480928193305133497}
   - component: {fileID: 5425079228778378055}
   - component: {fileID: 1410152973}
+  - component: {fileID: 1410152974}
   m_Layer: 5
   m_Name: IngredientButton
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -151,6 +152,27 @@ MonoBehaviour:
   ingredient: {fileID: 11400000, guid: 8405c1b1b4aabe2409c9b33ed06262a1, type: 2}
   ingredientIcon: {fileID: 8754099801528564752}
   ingredientName: {fileID: 6141095478348542770}
+--- !u!95 &1410152974
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378895946680493891}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6281604418662260538
 GameObject:
   m_ObjectHideFlags: 0

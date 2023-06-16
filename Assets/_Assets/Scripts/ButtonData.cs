@@ -15,7 +15,7 @@ public class ButtonData: MonoBehaviour
     [SerializeField] TMP_Text ingredientName;
 
 
-    private void Start()
+    private void Awake()
     {
         ingredientIcon.sprite = ingredient.ingredientIcon;
         ingredientName.text = ingredient.ingredientName;

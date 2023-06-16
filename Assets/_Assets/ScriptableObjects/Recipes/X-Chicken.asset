@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: X-Chicken
   m_EditorClassIdentifier: 
   recipeName: X-Chicken
-  recipeIcone: {fileID: 0}
+  recipeIcone: {fileID: -237684549, guid: 3137ed62770180142891dc17631cbbca, type: 3}
   ingredients:
   - {fileID: 11400000, guid: a6d6ddce530076b429363cce3fed25bb, type: 2}
   - {fileID: 11400000, guid: 8405c1b1b4aabe2409c9b33ed06262a1, type: 2}
