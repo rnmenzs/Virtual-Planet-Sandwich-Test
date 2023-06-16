@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         timeline.Play();
         StartCoroutine(StartGameCountDown());
         ClearTxt();
-        orderManager.ClearTxt();
+        orderManager.ClearOrder();
     }
 
     private void UpdateScore()
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         score = 0;
-        timer = 5;
+        timer = 30;
         UpdateScore();
         StartCoroutine(StartTimer());
         orderManager.NewOrder();
@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGameCountDown()
     {
-        int startCountDown = 10;
+        int startCountDown = 3;
         while (startCountDown > 0)
         {
             txtCountdown.text = startCountDown.ToString();

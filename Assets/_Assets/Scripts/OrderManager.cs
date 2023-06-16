@@ -16,6 +16,8 @@ public class OrderManager : MonoBehaviour
     [SerializeField] Image iconRecipe;
     [SerializeField] TMP_Text txtIngredients;
 
+    [SerializeField] Sprite empytSprite;
+
     //show the new recipe on order display
     public void NewOrder()
     {
@@ -38,9 +40,10 @@ public class OrderManager : MonoBehaviour
         currentRecipe = recipes[index];
     }
 
-    public void ClearTxt()
+    public void ClearOrder()
     {
         txtNameRecipe.text = "";
         txtIngredients.text = "";
+        iconRecipe.sprite = empytSprite;
     }
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5ae0d06cfb49584884486a16ae594a7, type: 3}
-  m_Name: X-Chicken
+  m_Name: DuploBurguer
   m_EditorClassIdentifier: 
-  recipeName: X-Chicken
-  recipeIcone: {fileID: -1188946122, guid: 4358bd6ccec1ddb43b7c8d7d0fd97177, type: 3}
+  recipeName: Duplo Burguer
+  recipeIcone: {fileID: 1046809685, guid: 4358bd6ccec1ddb43b7c8d7d0fd97177, type: 3}
   ingredients:
+  - {fileID: 11400000, guid: 9c92acc667179634f9c1286030d89e01, type: 2}
   - {fileID: 11400000, guid: 8405c1b1b4aabe2409c9b33ed06262a1, type: 2}
-  - {fileID: 11400000, guid: a6d6ddce530076b429363cce3fed25bb, type: 2}
-  - {fileID: 11400000, guid: af08051fe686ea14691678fb96257830, type: 2}
+  - {fileID: 11400000, guid: 9c92acc667179634f9c1286030d89e01, type: 2}

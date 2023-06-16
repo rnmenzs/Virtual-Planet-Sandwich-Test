@@ -272,7 +272,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -568,6 +568,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee0685c0d147ddf468d26a08820a181e, type: 2}
   - {fileID: 11400000, guid: 28ff30e894a696240909e6830621371f, type: 2}
   - {fileID: 11400000, guid: 1148f2dd63b66b14a9c1e582e3a85626, type: 2}
+  - {fileID: 11400000, guid: a8e03c20fd489ff47a65e2d4a4b753fb, type: 2}
+  - {fileID: 11400000, guid: 9682bfca0ea2be14c8bb3d61025da8e3, type: 2}
   currentRecipe: {fileID: 0}
   txtNameRecipe: {fileID: 1361433493}
   iconRecipe: {fileID: 1869320581}
@@ -1362,7 +1364,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 50331648
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1779,8 +1781,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: -961}
-  m_SizeDelta: {x: -540, y: -454}
+  m_AnchoredPosition: {x: 10, y: -1040.566}
+  m_SizeDelta: {x: -540, y: -613.132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &831486420
 MonoBehaviour:
@@ -1795,15 +1797,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.58022285, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4c608d228c938c942a903cacaecaaefe, type: 3}
+  m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3072,7 +3074,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d9543f4cedec3af429734dbba81d94ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3310,8 +3312,6 @@ PlayableDirector:
     value: {fileID: 1415974137}
   - key: {fileID: 10403661959795751, guid: 8124cd05bd4cdaf499f4f0618bcfc5cb, type: 2}
     value: {fileID: 295968238}
-  - key: {fileID: -4168150089328538973, guid: 8124cd05bd4cdaf499f4f0618bcfc5cb, type: 2}
-    value: {fileID: 1869320583}
   - key: {fileID: -4405109930016417677, guid: 8124cd05bd4cdaf499f4f0618bcfc5cb, type: 2}
     value: {fileID: 831486423}
   - key: {fileID: -6490882062125221264, guid: 8124cd05bd4cdaf499f4f0618bcfc5cb, type: 2}

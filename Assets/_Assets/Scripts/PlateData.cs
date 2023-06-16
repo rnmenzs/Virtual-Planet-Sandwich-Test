@@ -8,6 +8,7 @@ public class PlateData : MonoBehaviour
     [SerializeField]
     private IngredientsSO ingredient;
     [SerializeField] Image ingredientIcon;
+    [SerializeField] Sprite empytSprite;
 
 
     public IngredientsSO Ingredient 
@@ -23,6 +24,6 @@ public class PlateData : MonoBehaviour
 
     public void ClearPlate()
     {
-        ingredientIcon.sprite = null;
+        ingredientIcon.sprite = empytSprite;
     }
 }

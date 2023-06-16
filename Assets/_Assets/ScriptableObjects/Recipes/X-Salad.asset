@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: X-Salad
   m_EditorClassIdentifier: 
   recipeName: X-Salad
-  recipeIcone: {fileID: -618014047, guid: 3137ed62770180142891dc17631cbbca, type: 3}
+  recipeIcone: {fileID: -1631751501, guid: 4358bd6ccec1ddb43b7c8d7d0fd97177, type: 3}
   ingredients:
   - {fileID: 11400000, guid: 8405c1b1b4aabe2409c9b33ed06262a1, type: 2}
   - {fileID: 11400000, guid: af08051fe686ea14691678fb96257830, type: 2}
