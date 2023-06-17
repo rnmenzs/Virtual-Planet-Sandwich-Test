@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] PlayableDirector timeline;
 
+    [SerializeField] List<GameObject> audioPlayers;
+
     int score;
     int timer;
 
@@ -79,10 +81,12 @@ public class GameManager : MonoBehaviour
 
         if(ingredientsChecks == 3)
         {
+            audioPlayers[1].GetComponent<SfxPlayer>().PositiveSfx();
             score += 10;
         }
         else
         {
+            audioPlayers[1].GetComponent<SfxPlayer>().NegativeSfx();
             score -= 5;
         }
 
@@ -111,7 +115,8 @@ public class GameManager : MonoBehaviour
         UpdateScore();
         StartCoroutine(StartTimer());
         orderManager.NewOrder();
-
+        StartCoroutine(StartFade(audioPlayers[0].GetComponent<AudioSource>(), 10f, 0.4f));
+        audioPlayers[0].GetComponent<AudioSource>().Play();
     }
 
     private void GameOver()
@@ -129,6 +134,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGameCountDown()
     {
+        audioPlayers[1].GetComponent<SfxPlayer>().CountdownSfx();
         int startCountDown = 3;
         while (startCountDown > 0)
         {
@@ -147,10 +153,27 @@ public class GameManager : MonoBehaviour
             int min = timer / 60;
             int sec = timer % 60;
             txtTimer.text = string.Format("{0:00}:{1:00}", min, sec);
+            if(timer == 10)
+            {
+                StartCoroutine(StartFade(audioPlayers[0].GetComponent<AudioSource>(), 10f, 0f));
+            }
             yield return new WaitForSeconds(1f);
             timer--;
         }
 
+
         GameOver();
+    }
+    private static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
+    {
+        float currentTime = 0;
+        float start = audioSource.volume;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
     }
 }

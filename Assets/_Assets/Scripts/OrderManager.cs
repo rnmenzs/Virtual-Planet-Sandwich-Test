@@ -35,9 +35,9 @@ public class OrderManager : MonoBehaviour
     //choose a random recipe
     void RandomRecipe()
     {
-        int index = Random.Range(0, recipes.Length);
+        int i = Random.Range(0, recipes.Length - 1);
 
-        currentRecipe = recipes[index];
+        currentRecipe = recipes[i];
     }
 
     public void ClearOrder()
