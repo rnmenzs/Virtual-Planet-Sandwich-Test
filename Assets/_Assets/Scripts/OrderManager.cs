@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class OrderManager : MonoBehaviour
 {
-    [SerializeField] RecipeSO[] recipes;
-
-    [SerializeField]
     private List<RecipeSO> shuffledRecipes;
+    public RecipeSO CurrentRecipe { get { return currentRecipe; } }
+    
+    [SerializeField] RecipeSO[] recipes;
 
     [SerializeField] RecipeSO currentRecipe;
 
-    public RecipeSO CurrentRecipe { get { return currentRecipe; } }
 
     [SerializeField] TMP_Text txtNameRecipe;
     [SerializeField] Image iconRecipe;
     [SerializeField] TMP_Text txtIngredients;
+
+    [SerializeField] Image[] iconIngredients;
 
     [SerializeField] Sprite empytSprite;
 
@@ -28,9 +30,17 @@ public class OrderManager : MonoBehaviour
         txtNameRecipe.text = currentRecipe.recipeName;
         iconRecipe.sprite = currentRecipe.recipeIcone;
         string ingredients = "";
-        foreach (var i in currentRecipe.ingredients)
+        for (int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
-            ingredients += i.name + "\n";
+            if (i != 2){
+                ingredients += currentRecipe.ingredients[i].name + "\n\n";
+            }
+            else
+            {
+                ingredients += currentRecipe.ingredients[i].name;
+            }
+
+            iconIngredients[i].sprite = currentRecipe.ingredients[i].ingredientIcon;
         }
         txtIngredients.text = ingredients;
     }
@@ -49,6 +59,10 @@ public class OrderManager : MonoBehaviour
         txtNameRecipe.text = "";
         txtIngredients.text = "";
         iconRecipe.sprite = empytSprite;
+        for(int i = 0; i < iconIngredients.Length; i++)
+        {
+            iconIngredients[i].sprite = empytSprite;
+        }
     }
 
 
