@@ -30,9 +30,6 @@ public class GameManager : MonoBehaviour
     public UnityEvent WhenGameOver;
     public UnityEvent WhenRestart;
 
-
-
-
     RecipeSO currentRecipe;
 
     private void Awake()
@@ -48,66 +45,98 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Start the game with a countdown
     private void Start()
     {
         StartCoroutine(StartGameCountDown());
     }
 
+
+    // As it was not specified, I took the liberty of checking by ingredient regardless of order
     public void CheckRecipe()
     {
-        int ingredientsChecks = 0;
-        List<IngredientsSO> ingredientsPlates = new List<IngredientsSO>();
+        // Get the ingredients on the plates
+        List<IngredientsSO> ingredientsPlates = GetPlatesIngredients();
 
-        currentRecipe = orderManager.CurrentRecipe;
-        
-        foreach(GameObject plate in platesManager.Plates)
-        {
-            ingredientsPlates.Add(plate.GetComponent<PlateData>().Ingredient);
-        }
-        
-        foreach(IngredientsSO ingredient in currentRecipe.ingredients)
-        {
-            for(int i = 0; i < ingredientsPlates.Count; i++)
-            {
-                if (ingredient.ingredientName == ingredientsPlates[i].ingredientName)
-                {
-                    ingredientsPlates.Remove(ingredient);
-                    ingredientsChecks++;
-                    break;
-                }
-            }
-            
-        }
+        // Check how many ingredients match the current recipe
+        int ingredientsChecks = CountMatchingIngredients(ingredientsPlates);
 
-        if(ingredientsChecks == 3)
+        if (ingredientsChecks == 3)
         {
-            audioPlayers[1].GetComponent<SfxPlayer>().PositiveSfx();
-            score += 10;
+            CorrectRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 10);
         }
         else
         {
-            audioPlayers[1].GetComponent<SfxPlayer>().NegativeSfx();
-            score -= 5;
+            IncorretRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 5);
         }
 
+        // Generate a new order
         orderManager.NewOrder();
         UpdateScore();
     }
 
+    // Play positive sound effect and increase score
+    private void CorrectRecipe(SfxPlayer player, int points)
+    {
+        player.PositiveSfx();
+        score += points;
+    }
+
+    // Play negative sound effect and decrease score
+    private void IncorretRecipe(SfxPlayer player, int points)
+    {
+        player.NegativeSfx();
+        score -= points;
+    }
+
+    // Retrieve the ingredients on the plates
+    private List<IngredientsSO> GetPlatesIngredients()
+    {
+        List<IngredientsSO> ingredientsPlates = new List<IngredientsSO>();
+
+        foreach (GameObject plate in platesManager.Plates)
+        {
+            ingredientsPlates.Add(plate.GetComponent<PlateData>().Ingredient);
+        }
+
+        return ingredientsPlates;
+    }
+
+    // Count how many ingredients in the current recipe match the ingredients on the plates
+    private int CountMatchingIngredients(List<IngredientsSO> ingredientsPlates)
+    {
+        int ingredientsChecks = 0;
+        currentRecipe = orderManager.CurrentRecipe;
+
+        foreach (IngredientsSO ingredient in currentRecipe.ingredients)
+        {
+            if (ingredientsPlates.Contains(ingredient))
+            {
+                ingredientsPlates.Remove(ingredient);
+                ingredientsChecks++;
+            }
+        }
+
+        return ingredientsChecks;
+    }
+
+    // Restart the game
     public void RestartGame()
     {
-        WhenRestart.Invoke(); 
+        WhenRestart.Invoke();
         timeline.Play();
         StartCoroutine(StartGameCountDown());
         ClearTxt();
         orderManager.ClearOrder();
     }
 
+    // Update the score text
     private void UpdateScore()
     {
         txtScore.text = $"Score: {score}";
     }
 
+    // Initialize game variables and start the timer
     private void StartGame()
     {
         score = 0;
@@ -121,17 +150,19 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        // Execute game over actions
         WhenGameOver.Invoke();
         txtFinalScore.text = $"Score: {score}";
-        
     }
 
+    // Clear the score and timer text
     private void ClearTxt()
     {
         txtScore.text = "";
         txtTimer.text = "";
     }
 
+    // Show the countdown before starting the game
     private IEnumerator StartGameCountDown()
     {
         audioPlayers[1].GetComponent<SfxPlayer>().CountdownSfx();
@@ -146,6 +177,7 @@ public class GameManager : MonoBehaviour
         WhenStart.Invoke();
     }
 
+    // Start the game timer
     private IEnumerator StartTimer()
     {
         while (timer > 0)
@@ -153,17 +185,17 @@ public class GameManager : MonoBehaviour
             int min = timer / 60;
             int sec = timer % 60;
             txtTimer.text = string.Format("{0:00}:{1:00}", min, sec);
-            if(timer == 10)
+            if (timer == 10)
             {
                 StartCoroutine(StartFade(audioPlayers[0].GetComponent<AudioSource>(), 10f, 0f));
             }
             yield return new WaitForSeconds(1f);
             timer--;
         }
-
-
         GameOver();
     }
+
+    // Fade the audio source volume over time
     private static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
     {
         float currentTime = 0;

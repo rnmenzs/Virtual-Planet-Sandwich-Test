@@ -8,6 +8,9 @@ public class OrderManager : MonoBehaviour
 {
     [SerializeField] RecipeSO[] recipes;
 
+    [SerializeField]
+    private List<RecipeSO> shuffledRecipes;
+
     [SerializeField] RecipeSO currentRecipe;
 
     public RecipeSO CurrentRecipe { get { return currentRecipe; } }
@@ -35,9 +38,10 @@ public class OrderManager : MonoBehaviour
     //choose a random recipe
     void RandomRecipe()
     {
+        ShuffleRecipes();
         int i = Random.Range(0, recipes.Length - 1);
 
-        currentRecipe = recipes[i];
+        currentRecipe = shuffledRecipes[i];
     }
 
     public void ClearOrder()
@@ -45,5 +49,22 @@ public class OrderManager : MonoBehaviour
         txtNameRecipe.text = "";
         txtIngredients.text = "";
         iconRecipe.sprite = empytSprite;
+    }
+
+
+    //Fisher–Yates shuffle
+    private void ShuffleRecipes()
+    {
+
+        shuffledRecipes = new List<RecipeSO>(recipes);
+        int i = shuffledRecipes.Count;
+        while (i > 1)
+        {
+            i--;
+            int j = Random.Range(0, i + 1);
+            RecipeSO value = shuffledRecipes[j];
+            shuffledRecipes[j] = shuffledRecipes[i];
+            shuffledRecipes[i] = value;
+        }
     }
 }
