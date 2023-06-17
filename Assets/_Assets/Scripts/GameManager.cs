@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public bool IngredientsShuffle { get => ingredientsShuffle; set => ingredientsShuffle = value; }
 
     [SerializeField] OrderManager orderManager;
     [SerializeField] PlatesManager platesManager;
@@ -57,16 +58,47 @@ public class GameManager : MonoBehaviour
         // Get the ingredients on the plates
         List<IngredientsSO> ingredientsPlates = GetPlatesIngredients();
 
-        // Check how many ingredients match the current recipe
-        int ingredientsChecks = CountMatchingIngredients(ingredientsPlates);
-
-        if (ingredientsChecks == 3)
+        if (!ingredientsOrder)
         {
-            CorrectRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 10);
+            // Check how many ingredients match the current recipe
+            int ingredientsChecks = CountMatchingIngredients(ingredientsPlates);
+
+            if (ingredientsChecks == 3)
+            {
+                CorrectRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 10);
+            }
+            else
+            {
+                IncorretRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 5);
+            }
         }
         else
         {
-            IncorretRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 5);
+            currentRecipe = orderManager.CurrentRecipe;
+
+            bool isCorrect = false;
+            for (int i = 0; i < currentRecipe.ingredients.Length; i++)
+            {
+                
+                if (ingredientsPlates[i] == currentRecipe.ingredients[i])
+                {
+                    isCorrect = true;
+                }
+                else
+                {
+                    isCorrect = false;
+                }
+            }
+
+            if (isCorrect)
+            {
+                CorrectRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 10);
+            }
+            else
+            {
+                IncorretRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 5);
+            }
+
         }
 
         // Generate a new order

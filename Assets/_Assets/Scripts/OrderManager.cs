@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class OrderManager : MonoBehaviour
 {
     private List<RecipeSO> shuffledRecipes;
+    private IngredientsSO[] shuffledIngredients;
+
     public RecipeSO CurrentRecipe { get { return currentRecipe; } }
     
     [SerializeField] RecipeSO[] recipes;
@@ -30,6 +32,7 @@ public class OrderManager : MonoBehaviour
         txtNameRecipe.text = currentRecipe.recipeName;
         iconRecipe.sprite = currentRecipe.recipeIcone;
         string ingredients = "";
+
         for (int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
             if (i != 2){
@@ -49,9 +52,15 @@ public class OrderManager : MonoBehaviour
     void RandomRecipe()
     {
         ShuffleRecipes();
+        
         int i = Random.Range(0, recipes.Length - 1);
 
         currentRecipe = shuffledRecipes[i];
+
+        if (GameManager.Instance.IngredientsShuffle)
+        {
+            ShuffleIngredients();
+        }
     }
 
     public void ClearOrder()
@@ -80,5 +89,20 @@ public class OrderManager : MonoBehaviour
             shuffledRecipes[j] = shuffledRecipes[i];
             shuffledRecipes[i] = value;
         }
+    }
+
+    void ShuffleIngredients()
+    {
+        shuffledIngredients = currentRecipe.ingredients;
+        int i = currentRecipe.ingredients.Length;
+        while (i > 1)
+        {
+            i--;
+            int j = Random.Range(0, i + 1);
+            IngredientsSO value = shuffledIngredients[j];
+            shuffledIngredients[j] = shuffledIngredients[i];
+            shuffledIngredients[i] = value;
+        }
+        currentRecipe.ingredients = shuffledIngredients;
     }
 }
