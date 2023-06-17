@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayableDirector timeline;
 
     [SerializeField] List<GameObject> audioPlayers;
+    [SerializeField] List<Toggle> toggles;
 
     int score;
     int timer;
@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public UnityEvent WhenStart;
     public UnityEvent WhenGameOver;
     public UnityEvent WhenRestart;
+
+    bool ingredientsOrder = false;
+    bool ingredientsShuffle = false;
 
     RecipeSO currentRecipe;
 
@@ -46,10 +49,6 @@ public class GameManager : MonoBehaviour
     }
 
     // Start the game with a countdown
-    private void Start()
-    {
-        StartCoroutine(StartGameCountDown());
-    }
 
 
     // As it was not specified, I took the liberty of checking by ingredient regardless of order
@@ -125,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         WhenRestart.Invoke();
         timeline.Play();
-        StartCoroutine(StartGameCountDown());
+        StartCoroutine(StartGameCountdown());
         ClearTxt();
         orderManager.ClearOrder();
     }
@@ -163,9 +162,23 @@ public class GameManager : MonoBehaviour
         txtTimer.text = "";
     }
 
-    // Show the countdown before starting the game
-    private IEnumerator StartGameCountDown()
+    public void ChangeSettings()
     {
+        ingredientsOrder = toggles[0].isOn;
+        ingredientsShuffle = toggles[1].isOn;
+    }
+
+    public void CallStartGame()
+    {
+        StartCoroutine(StartGameCountdown());
+    }
+
+    // Show the countdown before starting the game
+    private IEnumerator StartGameCountdown()
+    {
+        ClearTxt();
+        orderManager.ClearOrder();
+        timeline.Play();
         audioPlayers[1].GetComponent<SfxPlayer>().CountdownSfx();
         int startCountDown = 3;
         while (startCountDown > 0)
