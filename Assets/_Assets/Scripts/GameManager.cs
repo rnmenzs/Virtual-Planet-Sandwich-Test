@@ -153,6 +153,7 @@ public class GameManager : MonoBehaviour
         // Execute game over actions
         WhenGameOver.Invoke();
         txtFinalScore.text = $"Score: {score}";
+        StartCoroutine(platesManager.ClearPlates());
     }
 
     // Clear the score and timer text

@@ -30,14 +30,21 @@ public class PlatesManager : MonoBehaviour
         platesCount++;
         if(platesCount == plates.Length)
         {
-            platesFull.Invoke();
-            foreach (var plate in plates)
-            {
-                plate.GetComponent<PlateData>().Ingredient = null;
-                plate.GetComponent<PlateData>().ClearPlate();
-            }
-
-            platesCount = 0;
+            StartCoroutine(ClearPlates());
         }
+    }
+
+    public IEnumerator ClearPlates()
+    {
+        yield return new WaitForSeconds(.5f);
+        platesFull.Invoke();
+        foreach (var plate in plates)
+        {
+            plate.GetComponent<PlateData>().Ingredient = null;
+            plate.GetComponent<PlateData>().ClearPlate();
+        }
+
+        platesCount = 0;
+        yield break;
     }
 }
