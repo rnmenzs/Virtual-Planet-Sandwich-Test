@@ -16,5 +16,5 @@ MonoBehaviour:
   recipeIcone: {fileID: -1188946122, guid: 4358bd6ccec1ddb43b7c8d7d0fd97177, type: 3}
   ingredients:
   - {fileID: 11400000, guid: 8405c1b1b4aabe2409c9b33ed06262a1, type: 2}
-  - {fileID: 11400000, guid: a6d6ddce530076b429363cce3fed25bb, type: 2}
   - {fileID: 11400000, guid: af08051fe686ea14691678fb96257830, type: 2}
+  - {fileID: 11400000, guid: a6d6ddce530076b429363cce3fed25bb, type: 2}

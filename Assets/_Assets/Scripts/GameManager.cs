@@ -58,8 +58,6 @@ public class GameManager : MonoBehaviour
         // Get the ingredients on the plates
         List<IngredientsSO> ingredientsPlates = GetPlatesIngredients();
 
-        if (!ingredientsOrder)
-        {
             // Check how many ingredients match the current recipe
             int ingredientsChecks = CountMatchingIngredients(ingredientsPlates);
 
@@ -71,35 +69,6 @@ public class GameManager : MonoBehaviour
             {
                 IncorretRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 5);
             }
-        }
-        else
-        {
-            currentRecipe = orderManager.CurrentRecipe;
-
-            bool isCorrect = false;
-            for (int i = 0; i < currentRecipe.ingredients.Length; i++)
-            {
-                
-                if (ingredientsPlates[i] == currentRecipe.ingredients[i])
-                {
-                    isCorrect = true;
-                }
-                else
-                {
-                    isCorrect = false;
-                }
-            }
-
-            if (isCorrect)
-            {
-                CorrectRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 10);
-            }
-            else
-            {
-                IncorretRecipe(audioPlayers[1].GetComponent<SfxPlayer>(), 5);
-            }
-
-        }
 
         // Generate a new order
         orderManager.NewOrder();
@@ -139,14 +108,30 @@ public class GameManager : MonoBehaviour
         int ingredientsChecks = 0;
         currentRecipe = orderManager.CurrentRecipe;
 
-        foreach (IngredientsSO ingredient in currentRecipe.ingredients)
+        if (!ingredientsOrder)
         {
-            if (ingredientsPlates.Contains(ingredient))
+            foreach (IngredientsSO ingredient in currentRecipe.ingredients)
             {
-                ingredientsPlates.Remove(ingredient);
-                ingredientsChecks++;
+                if (ingredientsPlates.Contains(ingredient))
+                {
+                    ingredientsPlates.Remove(ingredient);
+                    ingredientsChecks++;
+                }
             }
         }
+        else
+        {
+            for (int i = 0; i < currentRecipe.ingredients.Length; i++)
+            {
+                if (ingredientsPlates[i] == currentRecipe.ingredients[i])
+                {
+                    ingredientsChecks++;
+                }
+            }
+        }
+        
+
+        
 
         return ingredientsChecks;
     }
@@ -197,7 +182,17 @@ public class GameManager : MonoBehaviour
     public void ChangeSettings()
     {
         ingredientsOrder = toggles[0].isOn;
-        ingredientsShuffle = toggles[1].isOn;
+        toggles[1].interactable = toggles[0].isOn;
+        if (toggles[0].isOn)
+        {
+            ingredientsShuffle = toggles[1].isOn;
+        }
+        else
+        {
+            ingredientsShuffle = false;
+            toggles[1].isOn = false;
+        }
+
     }
 
     public void CallStartGame()
