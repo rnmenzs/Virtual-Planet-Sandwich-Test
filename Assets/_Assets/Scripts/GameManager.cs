@@ -49,10 +49,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start the game with a countdown
-
-
-    // As it was not specified, I took the liberty of checking by ingredient regardless of order
     public void CheckRecipe()
     {
         // Get the ingredients on the plates
@@ -156,7 +152,7 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         score = 0;
-        timer = 30;
+        timer = 120;
         UpdateScore();
         StartCoroutine(StartTimer());
         orderManager.NewOrder();
